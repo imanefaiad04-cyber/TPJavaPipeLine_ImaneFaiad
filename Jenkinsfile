@@ -19,8 +19,8 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Tests'
-                bat 'mvn clean package -DskipTests'
-                bat 'mvn test'
+                sh 'mvn clean package -DskipTests'
+                sh 'mvn test'
             }
         }
     }
