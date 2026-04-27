@@ -2,16 +2,35 @@ pipeline {
     agent any
 
     stages {
+        stage('Clone') {
+            steps {
+                echo ' GitHub'
+                checkout scm
+            }
+        }
+
         stage('Build') {
             steps {
-                echo 'Build started'
+                echo 'Compilation'
+                bat 'mvn clean package -DskipTests'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Tests started'
+                echo 'Tests'
+                bat 'mvn clean package -DskipTests'
+                bat 'mvn test'
             }
+        }
+    }
+
+    post {
+        success {
+            echo ''
+        }
+        failure {
+            echo ' Erreur'
         }
     }
 }
